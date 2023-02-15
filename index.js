@@ -3,7 +3,7 @@ const express = require('express');
 conn();
 
 const app = express()
-const port = 3000
+const port = 5000
 
 
 app.use(express.json());//if we want to use request-body(in the auth endpoint)
