@@ -17,7 +17,7 @@ app.use(express.json());//if we want to use request-body(in the auth endpoint)
 app.use('/api/auth',require('./routes/auth'));
 // http://localhost:3000/api/auth 
 
-// app.use('/api/notes',require('./routes/notes'));
+app.use('/api/notes',require('./routes/notes'));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
