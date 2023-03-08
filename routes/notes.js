@@ -9,6 +9,7 @@ const { findById } = require('../models/User');
 // ROUTE 1) FETCHING ALL NOTES
 router.get("/fetchnotes", fetchuser, async (req, res) =>
 {
+
     const notes = await Notes.find({ user: req.user.id });
     res.json({ notes });
 });
@@ -16,7 +17,7 @@ router.get("/fetchnotes", fetchuser, async (req, res) =>
 
 // ROUTE 2) CREATING NOTES
 
-router.post("/createnotes", fetchuser, [body('title', 'description must be atleast 2 char long').isLength({ min: 2 }), body('description', "description must be atleast 2 char long").isLength({ min: 2 })], async (req, res) =>
+router.post("/createnotes", fetchuser, [body('title', 'title must be atleast 2 char long').isLength({ min: 2 }), body('description', "description must be atleast 2 char long").isLength({ min: 2 })], async (req, res) =>
 {
     const errors = validationResult(req);
     const { title, description, tag } = req.body;
@@ -38,7 +39,13 @@ router.post("/createnotes", fetchuser, [body('title', 'description must be atlea
         });
         const savedNote = await notes.save();
 
-        res.json({ savedNote });
+        // res.json({ savedNote });
+
+        if (notes)
+        {
+            res.status(200).send("Note has been saved successfully");
+        }
+        // res.status(200).json(savedNote);
 
     } catch (error)
     {
@@ -127,7 +134,8 @@ router.delete("/deletenotes/:id", fetchuser, async (req, res) =>
             return res.status(404).send('Note not found');
         }
 
-        res.json({"success":"Successfully Deleted", note:note});
+        // res.json({"success":"Successfully Deleted", note:note});
+        res.status(200).send('Successfully Deleted');
 
     } catch (error)
     {

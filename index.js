@@ -7,6 +7,12 @@ const port = 5000
 
 
 app.use(express.json());//if we want to use request-body(in the auth endpoint)
+// app.setHeader("application/x-www-form-urlencoded");
+
+var cors = require('cors');
+
+// use it before all route definitions
+app.use(cors({origin: 'http://localhost:5000'}));
 
 // app.get('/', (req, res) => {
 //   res.send('Hello World!')
